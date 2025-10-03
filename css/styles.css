@@ -1,0 +1,99 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    background-color: #03a3df; 
+    color: #ffffff; 
+    text-align: right; 
+    padding:1rem;
+}
+
+h1 {
+    font-size: 40px; 
+    margin-bottom: 1rem;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 24px; 
+    margin-bottom: 1rem;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+}
+
+h3 {
+    font-size: 17px; 
+    margin-bottom: 1rem;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+}
+
+h4 {
+    font-size: 17px; 
+    margin-bottom: 1rem;
+    font-family: 'Arial', sans-serif;
+    font-weight: regular;
+}
+
+footer {
+    color: #ffffff;
+    position: relative;
+    background-image: url('https://github.com/ruizandre88/archery-website/blob/main/images/footerImage.jpg?raw=true');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 150px;
+    width: 100%;
+    padding: 2rem;
+}
+
+.nav-logo {
+    max-width: 100px;
+    height: 100%;
+    display: block;
+    margin: 0.5rem 0 0 0;
+    
+}
+.nav-links {
+    color: #ffffff;
+    display: flex; 
+    justify-content: flex-end; 
+    list-style: none; 
+    gap: .1rem; 
+    padding-left: 0; 
+    padding-bottom:15px;
+    padding-top:3;
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+
+}
+.nav-links a { 
+    color: #ffffff; 
+    padding: 10px; 
+    margin: 0 15px; 
+    text-decoration: none 
+}
+
+.footer-links a {
+    color: #ffffff; 
+    padding: 10px; 
+    margin: 0 15px; 
+    text-decoration: none 
+}
+.footer-logo {
+    max-width: 200px;
+    height: 100%;
+    display: block;
+    margin: 0.5rem 1rem 0;
+}
+
+}
