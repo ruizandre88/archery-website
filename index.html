@@ -3,38 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" rel="stylesheet">
     <title>Archery Academy</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <nav aria-label="Main navigation">
-        <img class="nav-logo" src="images/archeryacademy-logo-white.png" class="responsive-img logo" alt="Straight to the point Archery logo">
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="about.html">About Us</a>
-            <a href="classes.html">Classes</a>
-            <a href="private-lessons.html">Private Lessons</a>
-            <a href="instructors.html">Instructors</a>
-            <a href="contact.html">Contact Us</a>
+        <button class="nav-toggle" aria-label="Open navigation" aria-controls="nav-links" aria-expanded="false">
+            <span class="hamburger"></span>
+        </button>
+        <img class="nav-logo" src="images/archeryacademy-logo-white.png" alt="Straight to the point Archery logo">
+        <div class="nav-links-wrapper" id="nav-links">
+            <div class="nav-links">
+                <div class="nav-link-item"><a href="index.html">Home</a></div>
+                <div class="nav-link-item"><a href="about.html">About Us</a></div>
+                <div class="nav-link-item"><a href="classes.html">Classes</a></div>
+                <div class="nav-link-item"><a href="private-lessons.html">Private Lessons</a></div>
+                <div class="nav-link-item"><a href="instructors.html">Instructors</a></div>
+                <div class="nav-link-item"><a href="contact.html">Contact Us</a></div>
+            </div>
         </div>
     </nav>
     <header>   
         <section>
             <h1>Hit Your First Bullseye</h1>
-            <p>At Straight to the Point Archery Academy, we provide top-notch archery training for all skill levels. Whether you're a beginner looking to learn the basics or an experienced archer aiming to refine your technique, our expert instructors are here to help you achieve your goals.</p>
-            <button class="btn"><a href="classes.html">View Classes</a></button>
+            <p class="header-text">Aim Higher. Hit Your Mark. Archery for Everyone.</p>
+            <button class="btn" onclick="window.location.href='classes.html'">View Classes</button>
         </section> 
     </header>
-    <main>
+    <main id="main-content">
         <section>
-            <p>At Straight to the Point Archery Academy, we believe in fostering discipline, focus, and confidence through the art of archery. Our academy is dedicated to creating an inclusive and supportive community where every student can grow, learn, and achieve their personal best. With experienced instructors and a commitment to safety, we provide a welcoming environment for archers of all ages and skill levels.</p>
+            <p class="intro-text">At Straight to the Point Archery Academy, we help students build confidence and focus through archery. Our experienced instructors create a safe, welcoming environment for all ages and skill levels.</p>
         </section>
-
+        
+        <section class="home-row">
+            <div class="home-item">
+                 <h2>Our Classes</h2>
+                    <img src="images/archery-class.jpg" class="responsive-img" alt="Archery class with instructor helping a student aim at the target">
+                    <button class="btn" onclick="window.location.href='classes.html'">View Classes</button>
+            </div>
+            <div class="home-item">
+                    <h2>Private Lessons</h2>
+                    <img src="images/private-lesson.jpg" class="responsive-img" alt="Archery class with instructor showing how the bow works to a student">
+                    <button class="btn" onclick="window.location.href='private-lessons.html'">Book a Private Lesson</button>
+            </div>
+            <div class="home-item">
+                    <h2>Our Instructors</h2>
+                    <img src="images/instructor-bio-image1.png" class="instructor-img" alt="Archery class instructor posing for a headshot">
+                    <button class="btn" onclick="window.location.href='instructors.html'">Meet Our Instructors</button>
+            </div>
+        </section>
     </main>
     <footer>
-        <img src="images/archeryacademy-logo-white.png" class="footer-logo" alt="Straight to the point Archery logo">
-        <br>
-        <h4>Quick Links:</h4>
        <div class="footer-links">
             <a href="index.html">Home</a> |
             <a href="about.html">About Us</a> |
@@ -44,11 +66,19 @@
             <a href="contact.html">Contact Us</a>
         </div>
         <br>
-        <p>&copy; 2025 Straight to the Point Archery Academy</p>
-        <p>All rights reserved.</p>
+                <img src="images/archeryacademy-logo-white.png" class="footer-logo" alt="Straight to the point Archery logo">
+        <div class="footer-text">
+            <p>&copy; 2025 Straight to the Point Archery Academy</p>
+            <p>All rights reserved.</p>
+        </div>
     </footer>
+<script>
+document.querySelector('.nav-toggle').addEventListener('click', function() {
+    var navLinks = document.getElementById('nav-links');
+    var expanded = this.getAttribute('aria-expanded') === 'true';
+    this.setAttribute('aria-expanded', !expanded);
+    navLinks.classList.toggle('open');
+});
+</script>
 </body>
-    
-
-
 </html>
