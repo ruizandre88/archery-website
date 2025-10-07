@@ -26,34 +26,61 @@
             </div>
         </div>
     </nav>
-    <header>   
+    <header class="header-other">   
         <section class="hero-section">
             <h1>Hit Your First Bullseye</h1>
             <p class="header-text">Aim Higher. Hit Your Mark. Archery for Everyone.</p>
-            <button class="btn" onclick="window.location.href='classes.html'">View Classes</button>
         </section> 
     </header>
     <main id="main-content">
-        <section>
-            <p class="intro-text">At Straight to the Point Archery Academy, we help students build confidence and focus through archery. Our experienced instructors create a safe, welcoming environment for all ages and skill levels.</p>
-        </section>
-        
-        <section class="home-row">
-            <div class="home-item">
-                 <h2>Our Classes</h2>
-                    <img src="images/archery-class.jpg" class="responsive-img" alt="Archery class with instructor helping a student aim at the target">
-                    <button class="btn" onclick="window.location.href='classes.html'">View Classes</button>
+        <section class="classes-content">
+                <div class="tabs">
+                    <button class="tab active" data-tab="beginner">Beginner</button>
+                    <button class="tab" data-tab="intermediate">Intermediate</button>
+                    <button class="tab" data-tab="advanced">Advanced</button>
+                </div>
+                <div class="tab-content" id="beginner" style="display: block;">
+                    <h2>A101 Basic Archery</h2>
+                    <p>A101 is a basic archery course that focuses on beginning archery safety, skills, and drills. Participants learn about archery form, range rules, and etiquette. Form training and fun games are introduced in this class. Equipment will be provided except for the safety kit.</p>
+                    <ul>
+                        <li>Cost: $120/month</li>
+                        <li>Schedule: Mondays and Wednesdays, 4-5 pm</li>
+                        <li>Pre-requisite: Interest in learning about the sport of archery. Minimum age 8 years old or 7 with pre-evaluation.</li>
+                    </ul>
+                </div>
+                <div class="tab-content" id="intermediate" style="display: none;">
+                    <h2>A102 Intermediate Archery</h2>
+                    <p>A102 is an intermediate archery course that focuses on intermediate archery safety and form. It introduces new equipment styles like shooting recurve and compound bows. Fun games and form reinforcement techniques are emphasized in this class. Equipment will be provided except for the safety kit.</p>
+                    <ul>
+                        <li>Cost: $120/month</li>
+                        <li>Schedule: Tuesdays and Thursdays, 4-5 pm</li>
+                        <li>Pre-requisite: A101 or recommendation from a private lesson instructor. Minimum age 7 years old.</li>
+                    </ul>
+                </div>
+                <div class="tab-content" id="advanced" style="display: none;">
+                    <h2>A103 Advanced Archery</h2>
+                    <p>After taking the A101 and A102 classes, students are eligible to participate in the A103 class. This class focuses on continued education towards tournament styles of shooting used by many archery associations around the world. Participants receive ongoing guidance on shooting form and advice on personal equipment selections. Equipment will be provided except for the safety kit.</p>
+                    <ul>
+                        <li>Cost: $120/month</li>
+                        <li>Schedule:Tuesdays and Thursdays, 5-6 pm</li>
+                        <li>Pre-requisite:A101/A102 or equivalent. Minimum age 7 years old.</li>
+                    </ul>
+                </div>
             </div>
-            <div class="home-item">
-                    <h2>Private Lessons</h2>
-                    <img src="images/private-lesson.jpg" class="responsive-img" alt="Archery class with instructor showing how the bow works to a student">
-                    <button class="btn" onclick="window.location.href='private-lessons.html'">Book a Private Lesson</button>
-            </div>
-            <div class="home-item">
-                    <h2>Our Instructors</h2>
-                    <img src="images/instructor-bio-image1.png" class="instructor-img" alt="Archery class instructor posing for a headshot">
-                    <button class="btn" onclick="window.location.href='instructors.html'">Meet Our Instructors</button>
-            </div>
+            <script>
+            document.querySelectorAll('.tab').forEach(function(tab) {
+                tab.addEventListener('click', function() {
+                    document.querySelectorAll('.tab').forEach(function(t) {
+                        t.classList.remove('active');
+                    });
+                    tab.classList.add('active');
+                    document.querySelectorAll('.tab-content').forEach(function(content) {
+                        content.style.display = 'none';
+                    });
+                    document.getElementById(tab.getAttribute('data-tab')).style.display = 'block';
+                });
+            });
+            </script>
         </section>
     </main>
     <footer>
@@ -78,6 +105,28 @@ document.querySelector('.nav-toggle').addEventListener('click', function() {
     var expanded = this.getAttribute('aria-expanded') === 'true';
     this.setAttribute('aria-expanded', !expanded);
     navLinks.classList.toggle('open');
+});
+
+document.querySelectorAll('.tabs .tab').forEach(function(tab) {
+    tab.addEventListener('click', function(e) {
+        var tabs = tab.closest('.tabs');
+        if (window.innerWidth <= 600) {
+            if (!tabs.classList.contains('expanded')) {
+                tabs.classList.add('expanded');
+                e.stopPropagation();
+            } else {
+                tabs.classList.remove('expanded');
+            }
+        }
+    });
+});
+// Optional: collapse dropdown when clicking outside
+document.addEventListener('click', function(e) {
+    document.querySelectorAll('.tabs.expanded').forEach(function(tabs) {
+        if (!tabs.contains(e.target)) {
+            tabs.classList.remove('expanded');
+        }
+    });
 });
 </script>
 </body>
