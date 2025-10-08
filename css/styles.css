@@ -1,1154 +1,194 @@
-/* --- CSS Reset & Global Styles --- */
-*, *::before, *::after {
-    box-sizing: border-box;
-}
-* {
-    font-family:'Open Sans', sans-serif;
-    margin: 0;
-    padding: 0;
-}
-html, body {
-    height: 100%;
-}
+/* Cleaned stylesheet: reset → base → layout → components → utilities → media queries */
 
-/* --- Base Elements --- */
-h1 {
-    color: #ffffff;
-    font-size: 40px; 
-    margin-bottom: 1rem;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bold;
+/* -----------------------------
+   Reset & base
+   ----------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { height: 100%; }
+:root {
+  --brand-blue: #1b447f;
+  --accent: #ecb722;
+  --nav-blue: #03a3df;
+  --text-inverse: #ffffff;
 }
-h2 {
-    color: #1b447f;
-    font-size: 24px; 
-    margin-bottom: 1rem;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bold;
-}
-h3, h4 {
-    font-size: 17px; 
-    margin-bottom: 1rem;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bold;
-}
-p {
-    line-height: 1.6;
-    margin-bottom: 1rem;
-}
-a {
-    text-decoration: none;
-}
-button {
-    background-color: #ecb722;
-    color: #1b447f;
-    border: solid #ffffff 2px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bold;
-}
-img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    object-fit: contain;
-}
-
-/* --- Layout Containers --- */
 body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  color: #222;
 }
+
+/* Headings */
+h1 { color: var(--text-inverse); font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 40px; margin-bottom: 1rem; }
+h2 { color: var(--brand-blue); font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 24px; margin-bottom: 1rem; }
+h3, h4 { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 17px; margin-bottom: 1rem; }
+p { line-height: 1.6; margin-bottom: 1rem; }
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; height: auto; display: block; object-fit: contain; }
+
+button, .btn { /* unify button styles */
+  display: inline-block;
+  background-color: var(--accent);
+  color: var(--brand-blue);
+  border: 2px solid var(--text-inverse);
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.15);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  text-decoration: none;
+}
+.btn:hover, .btn:focus, button:hover, button:focus { transform: translateY(-1px); box-shadow: 4px 4px 8px rgba(0,0,0,0.12); }
+
+/* accessibility helpers */
+.visually-hidden { position: absolute !important; left: -9999px !important; width: 1px; height: 1px; overflow: hidden; }
+.status-success { color: #0a6120; }
+.status-error { color: #7a0b0b; }
+
+/* -----------------------------
+   Layout
+   ----------------------------- */
 header, .header-other {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: left;
-    min-height: 60vh;
-    padding: 2rem;
-    background-image: linear-gradient(rgba(27,68,127,0.5), rgba(3,163,223,0.5)), url(https://raw.githubusercontent.com/ruizandre88/archery-website/refs/heads/main/images/hero-image.jpg);
-    background-size: cover;
-    background-position: center;
-    margin-bottom: 1rem;
-    border-top: solid #ecb722 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 60vh;
+  padding: 2rem;
+  background-image: linear-gradient(rgba(27,68,127,0.5), rgba(3,163,223,0.5)), url(https://raw.githubusercontent.com/ruizandre88/archery-website/refs/heads/main/images/hero-image.jpg);
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 1rem;
+  border-top: 5px solid var(--accent);
 }
-.header-other {
-    min-height: 240px;
-}
-main {
-    flex: 1;
-    margin: 1rem 2rem;
-    padding: 1rem;
-    box-sizing: border-box;
-}
+.header-other { min-height: 240px; }
+
 nav {
-    display: flex;
-    justify-content: space-between;
-    background-color: #03a3df; 
-    color: #ffffff; 
-    text-align: right; 
-    padding: 1rem 1rem 1rem 2rem;
-    margin-bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--nav-blue);
+  color: var(--text-inverse);
+  padding: 1rem 1rem 1rem 2rem;
+  align-items: center;
 }
+
+main { flex: 1; margin: 1rem 2rem; padding: 1rem; box-sizing: border-box; }
+
 footer {
-    color: #ffffff;
-    position: relative;
+    color: var(--text-inverse);
     background-image: url('https://github.com/ruizandre88/archery-website/blob/main/images/footerImage.jpg?raw=true');
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
-    min-height: 250px;
+    min-height: 260px;
     width: 100%;
-    padding: 1rem;
-    margin: 0;
+    padding: 1.25rem 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
     box-sizing: border-box;
-    z-index: 1;
 }
 
-/* --- Components --- */
-.about-flex {
-    display: flex;
-    flex-direction: row;
-    gap: 2rem;
-    align-items: flex-start;
-}
-.about-main {
-    flex: 1 1 70%;
-    min-width: 0;
-}
-.about-aside {
-    flex: 0 0 30%;
-    min-width: 260px;
-    max-width: 400px;
-}
-.home-row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    margin: 2rem 0;
-}
+/* -----------------------------
+   Components
+   ----------------------------- */
+.about-flex { 
+    display: flex; gap: 2rem; align-items: flex-start; }
+.about-main { 
+    flex: 1 1 70%; min-width: 0; }
+.about-aside { 
+    flex: 0 0 30%; min-width: 260px; max-width: 400px; }
+
+.home-row { 
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin: 2rem 0; }
 .home-item {
-    background: lightgray;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-    padding: 2rem;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    height: auto;
-    box-sizing: border-box;
+  background: #f0f0f0;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  padding: 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 }
-.home-item img {
-    margin-bottom: 1.5rem;
-    height: 220px;
-    width: auto;
-    object-fit: cover;
-    display: block;
-    max-width: 100%;
-}
-.home-item button {
-    margin-top: auto;
-    align-self: center;
-}
-.instructor-img {
-    width: 220px;
-    height: 220px;
-    object-fit: cover;
-    border-radius: 50%;
-    display: block;
-    margin-bottom: 1.5rem;
-}
-.footer-logo, .nav-logo {
-    max-width: 150px;
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: contain;
-}
-.footer-links {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    max-width: 900px;
-    margin: 0 auto 1rem auto;
-    gap: 0.5rem;
-    box-sizing: border-box;
-}
-.footer-links a {
-    color: #ffffff;
-    font-size: small;
-    padding: 10px;
-    margin: 0 8px;
-    text-decoration: none;
-    white-space: nowrap;
-}
-.footer-logo {
-    max-width: 150px;
-    height: 100%;
-    display: block;
-    margin: 0.5rem .5rem 0;
-}
-.footer-text {
-    font-size: .75rem;
-    font-family: 'Arial', sans-serif;
-    margin-top: 2rem;
-}
-.intro-text {
-    width: 70%;
-    font-size: 1.5rem;
-    margin: 1rem auto;
-    text-align: center;
-}
-.classes-content {
-    background: #e0e0e0;
-    padding: 2rem;
-    border-radius: 8px;
-}
-.tabs {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 1rem;
-}
-.tabs button {
-    min-width: 120px;
-    font-size: 1rem;
-    padding: 0.75rem 1.5rem;
-    border-radius: 6px;
-    transition: all 0.2s;
-}
-.tab-content {
-    display: none;
-}
-.tab-content.active {
-    display: block;
-}
-.tab-content ul {
-    padding-left: 2rem;
-}
-.nav-links {
-    color: #ffffff;
-    display: flex; 
-    justify-content: flex-end; 
-    list-style: none; 
-    gap: .1rem; 
-    padding-left: 0; 
-    padding-bottom: 15px;
-    font-family: 'Arial', sans-serif;
-    font-size: 14px;
-}
-.nav-link-item {
-    padding: 1rem;
-    border-radius: 5px;
-}
-.nav-link-item:hover {
-    text-decoration: underline;
-    border: solid #ecb722 1px;
-    background-color: rgba(27, 68, 127, 0.4);
-}
-.nav-links a { 
-    color: #ffffff; 
-    padding: 1rem; 
-    margin: 0 10px; 
-    text-decoration: none;
-}
-.nav-toggle {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-    margin-right: 1rem;
-    align-self: center;
-}
-.hamburger {
-    display: block;
-    width: 28px;
-    height: 3px;
-    background: #fff;
-    position: relative;
-}
-.hamburger::before,
-.hamburger::after {
-    content: '';
-    display: block;
-    width: 28px;
-    height: 3px;
-    background: #fff;
-    position: absolute;
-    left: 0;
-    transition: 0.3s;
-}
-.hamburger::before { top: -8px; }
-.hamburger::after { top: 8px; }
-.nav-logo {
-    max-width: 150px;
-    height: 100%;
-    display: block;
-    margin: 0.5rem 0 0 0;
-}
+.home-item img { margin-bottom: 1.25rem; height: 220px; width: auto; object-fit: cover; }
+
+.instructors-section { margin-top: 2rem; }
+.instructors-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 1rem; }
+.instructor-card { background: #fff; border-radius: 8px; padding: 1.5rem; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.08); display:flex; flex-direction:column; align-items:center; }
+.instructor-headshot { width:160px; height:160px; object-fit:cover; border-radius:50%; margin-bottom:1rem; }
+.instructor-card p { margin-bottom: 1rem; }
+
+.footer-links { display:flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; max-width: 900px; margin: 0 auto 1rem; }
+.footer-links a { color: var(--text-inverse); font-size: 0.9rem; padding: 8px; white-space: nowrap; }
+.footer-logo, .nav-logo { max-width: 150px; width: 100%; height: auto; display: block; }
+.footer-text { font-size: .75rem; font-family: Arial, sans-serif; margin-top: 1rem; }
+
+.intro-text { max-width: 900px; font-size: 1.25rem; margin: 1rem auto; text-align: center; }
+.classes-content { background: #e9e9e9; padding: 2rem; border-radius: 8px; }
+
+.tabs { display:flex; gap:1rem; margin-bottom:1rem; }
+.tabs .tab { min-width:120px; padding: 0.6rem 1rem; border-radius:6px; }
+.tab-content { display:none; }
+.tab-content.active { display:block; }
+
+.contact-section { max-width: 900px; margin: 2rem auto; background: #f7f7f7; padding: 1.5rem; border-radius:8px; }
+.contact-form label { display:block; margin:0.5rem 0 0.25rem; }
+.contact-form input, .contact-form select, .contact-form textarea { width:100%; padding:0.5rem; border:1px solid #ccc; border-radius:4px; box-sizing:border-box; }
+.contact-form .conditional-fields { margin: 0.5rem 0; }
+
+.nav-links { display:flex; gap:0.25rem; align-items:center; }
+.nav-link-item { padding: 0.5rem 1rem; border-radius:5px; }
+.nav-link-item:hover { text-decoration: underline; border: 1px solid var(--accent); background-color: rgba(27,68,127,0.12); }
+.nav-links a { color: var(--text-inverse); padding: 0.5rem 0.75rem; }
+
+.nav-toggle { display:none; background:none; border:none; cursor:pointer; }
+.hamburger { display:block; width:28px; height:3px; background:#fff; position:relative; }
+.hamburger::before, .hamburger::after { content: ''; position:absolute; left:0; width:28px; height:3px; background:#fff; transition: 0.3s; }
+.hamburger::before { top:-8px; } .hamburger::after { top:8px; }
+
+.skip-link { position:absolute; left:-999px; top:auto; width:1px; height:1px; overflow:hidden; background:#222; color:#fff; padding:8px 16px; z-index:1000; text-decoration:underline; border-radius:4px; }
+.skip-link:focus, .skip-link:active { position:static; left:auto; width:auto; height:auto; overflow:visible; }
+
+/* Header tagline (restored) */
 .header-text {
-    font-size: 1.2rem; 
-    color: #ffffff; 
-    max-width: 600px; 
-    margin-bottom: 1.5rem; 
-    line-height: 1.4; 
-}
-.skip-link {
-    position: absolute;
-    left: -999px;
-    top: auto;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    background: #222;
-    color: #fff;
-    padding: 8px 16px;
-    z-index: 1000;
-    text-decoration: underline;
-    border-radius: 4px;
-}
-.skip-link:focus, .skip-link:active {
-    position: static;
-    left: auto;
-    width: auto;
-    height: auto;
-    overflow: visible;
+  font-size: 1.2rem;
+  color: var(--text-inverse);
+  max-width: 600px;
+  margin-bottom: 1.5rem;
+  line-height: 1.4;
 }
 
-/* --- Media Queries --- */
+/* -----------------------------
+   Utilities
+   ----------------------------- */
+.home-item button { margin-top: auto; }
+.instructor-card .btn { align-self: center; }
+
+/* -----------------------------
+   Responsive
+   ----------------------------- */
 @media (max-width: 900px) {
-    .about-flex {
-        flex-direction: column;
-        gap: 1.5rem;
-    }
-    .about-main, .about-aside {
-        flex: 1 1 100%;
-        min-width: 0;
-        max-width: 100%;
-    }
-    .about-aside iframe {
-        width: 100% !important;
-        height: 250px !important;
-    }
+  .about-flex { flex-direction: column; gap: 1.5rem; }
+  .about-main, .about-aside { flex: 1 1 100%; max-width: 100%; }
+  .about-aside iframe { width: 100% !important; height: 250px !important; }
+  .home-row { grid-template-columns: 1fr; gap: 1rem; justify-items: center; }
+  .instructors-grid { grid-template-columns: 1fr; }
+  .instructor-card .btn { width:100%; }
+  .nav-toggle { display:block; }
+  .nav-links-wrapper { display:none; position:absolute; top:100%; left:0; width:100vw; background: var(--nav-blue); z-index:100; }
+  .nav-links-wrapper.open { display:block; }
+  nav { position: relative; }
 }
+
 @media (max-width: 600px) {
-    .tabs {
-        position: relative;
-        flex-direction: column;
-        align-items: stretch;
-        overflow: visible;
-    }
-    .tabs .tab {
-        width: 100%;
-        min-width: unset;
-        margin-bottom: 0.75rem;
-        font-size: 1.1rem;
-        transition: max-height 0.3s, opacity 0.3s;
-        max-height: 0;
-        opacity: 0;
-        pointer-events: none;
-        position: absolute;
-        left: 0;
-        top: 0;
-        z-index: 2;
-    }
-    .tabs .tab.active {
-        max-height: 60px;
-        opacity: 1;
-        pointer-events: auto;
-        position: relative;
-    }
-    .tabs.expanded .tab {
-        max-height: 60px;
-        opacity: 1;
-        pointer-events: auto;
-        position: relative;
-        margin-bottom: 0.75rem;
-    }
-    .tabs .tab.active::after {
-        content: " \25BC";
-        font-size: 1.2em;
-        margin-left: 0.5em;
-        vertical-align: middle;
-        transition: transform 0.3s;
-    }
-    .tabs.expanded .tab.active::after {
-        transform: rotate(180deg);
-    }
-    .tabs {
-        flex-direction: column;
-        align-items: stretch;
-    }
-    .tabs button {
-        width: 100%;
-        min-width: unset;
-        margin-bottom: 0.75rem;
-        font-size: 1.1rem;
-    }
-}
-.about-flex {
-    display: flex;
-    flex-direction: row;
-    gap: 2rem;
-    align-items: flex-start;
-}
-.about-main {
-    flex: 1 1 70%;
-    min-width: 0;
-}
-.about-aside {
-    flex: 0 0 30%;
-    min-width: 260px;
-    max-width: 400px;
-}
-@media (max-width: 900px) {
-    .about-flex {
-        flex-direction: column;
-        gap: 1.5rem;
-    }
-    .about-main, .about-aside {
-        flex: 1 1 100%;
-        min-width: 0;
-        max-width: 100%;
-    }
-    .about-aside iframe {
-        width: 100% !important;
-        height: 250px !important;
-    }
-}
-/* Responsive expandable tab buttons */
-@media (max-width: 600px) {
-    .tabs {
-        position: relative;
-        flex-direction: column;
-        align-items: stretch;
-        overflow: visible;
-    }
-    .tabs .tab {
-        width: 100%;
-        min-width: unset;
-        margin-bottom: 0.75rem;
-        font-size: 1.1rem;
-        transition: max-height 0.3s, opacity 0.3s;
-        max-height: 0;
-        opacity: 0;
-        pointer-events: none;
-        position: absolute;
-        left: 0;
-        top: 0;
-        z-index: 2;
-    }
-    .tabs .tab.active {
-        max-height: 60px;
-        opacity: 1;
-        pointer-events: auto;
-        position: relative;
-    }
-    .tabs.expanded .tab {
-        max-height: 60px;
-        opacity: 1;
-        pointer-events: auto;
-        position: relative;
-        margin-bottom: 0.75rem;
-    }
-    .tabs .tab.active::after {
-        content: " \25BC";
-        font-size: 1.2em;
-        margin-left: 0.5em;
-        vertical-align: middle;
-        transition: transform 0.3s;
-    }
-    .tabs.expanded .tab.active::after {
-        transform: rotate(180deg);
-    }
-}
-.tabs button {
-    min-width: 120px;
-    font-size: 1rem;
-    padding: 0.75rem 1.5rem;
-    border-radius: 6px;
-    transition: all 0.2s;
-}
-@media (max-width: 600px) {
-    .tabs {
-        flex-direction: column;
-        align-items: stretch;
-    }
-    .tabs button {
-        width: 100%;
-        min-width: unset;
-        margin-bottom: 0.75rem;
-        font-size: 1.1rem;
-    }
-}
-.tab-content ul {
-    padding-left: 2rem;
-}
-/* --- Layout Containers --- */
-body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-header {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: left;
-    min-height: 60vh;
-    padding: 2rem;
-    background-image: linear-gradient(rgba(27,68,127,0.5), rgba(3,163,223,0.5)), url(https://raw.githubusercontent.com/ruizandre88/archery-website/refs/heads/main/images/hero-image.jpg);
-    background-size: cover;
-    background-position: center;
-    min-height: 400px;
-    margin-bottom: 1rem;
-    border-top: solid #ecb722 5px;
-}
-nav {
-    display: flex;
-    justify-content: space-between;
-    background-color: #03a3df; 
-    color: #ffffff; 
-    text-align: right; 
-    padding: 1rem 1rem 1rem 2rem;
-    margin-bottom: 0;
-}
-main {
-    flex: 1;
-    margin: 1rem 2rem;
-    padding: 1rem;
-    box-sizing: border-box;
-}
-footer {
-    color: #ffffff;
-    position: relative;
-    background-image: url('https://github.com/ruizandre88/archery-website/blob/main/images/footerImage.jpg?raw=true');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    min-height: 250px;
-    width: 100%;
-    padding: 1rem;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    box-sizing: border-box;
-    z-index: 1;
-}
-p {
-    line-height: 1.6;
-    margin-bottom: 1rem;
-}
-
-/* --- Components --- */
-.header-other {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: left;
-    min-height: 60vh;
-    padding: 2rem;
-    background-image: linear-gradient(rgba(27,68,127,0.5), rgba(3,163,223,0.5)), url(https://raw.githubusercontent.com/ruizandre88/archery-website/refs/heads/main/images/hero-image.jpg);
-    background-size: cover;
-    background-position: center;
-    min-height: 240px;
-    margin-bottom: 1rem;
-    border-top: solid #ecb722 5px;
-}
-.home-row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    margin: 2rem 0;
-}
-.home-item {
-    background: lightgray;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-    padding: 2rem;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    height: auto;
-    box-sizing: border-box;
-}
-.home-item img {
-    margin-bottom: 1.5rem;
-    height: 220px;
-    width: auto;
-    object-fit: cover;
-    display: block;
-    max-width: 100%;
-}
-.home-item button {
-    margin-top: auto;
-    align-self: center;
-}
-.instructor-img {
-    width: 220px;
-    height: 220px;
-    object-fit: cover;
-    border-radius: 50%;
-    display: block;
-    margin-bottom: 1.5rem;
-}
-.footer-logo, .nav-logo {
-    max-width: 150px;
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: contain;
-}
-.footer-links {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    max-width: 900px;
-    margin: 0 auto 1rem auto;
-    gap: 0.5rem;
-    box-sizing: border-box;
-}
-.footer-links a {
-    color: #ffffff;
-    font-size: small;
-    padding: 10px;
-    margin: 0 8px;
-    text-decoration: none;
-    white-space: nowrap;
-}
-.footer-logo {
-    max-width: 150px;
-    height: 100%;
-    display: block;
-    margin: 0.5rem .5rem 0;
-}
-.footer-text {
-    font-size: .75rem;
-    font-family: 'Arial', sans-serif;
-    margin-top: 2rem;
-}
-.intro-text {
-    width: 70%;
-    font-size: 1.5rem;
-    margin: 1rem auto;
-    text-align: center;
-}
-.classes-content {
-    background: #e0e0e0;
-    padding: 2rem;
-    border-radius: 8px;
-}
-.tabs {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 1rem;
-}
-.tab-content {
-    display: none;
-}
-.tab-content.active {
-    display: block;
-}
-.nav-links {
-    color: #ffffff;
-    display: flex; 
-    justify-content: flex-end; 
-    list-style: none; 
-    gap: .1rem; 
-    padding-left: 0; 
-    padding-bottom: 15px;
-    font-family: 'Arial', sans-serif;
-    font-size: 14px;
-}
-.nav-link-item {
-    padding: 1rem;
-    border-radius: 5px;
-}
-.nav-link-item:hover {
-    text-decoration: underline;
-    border: solid #ecb722 1px;
-    background-color: rgba(27, 68, 127, 0.4);
-}
-.nav-links a { 
-    color: #ffffff; 
-    padding: 1rem; 
-    margin: 0 10px; 
-    text-decoration: none;
-}
-.nav-toggle {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-    margin-right: 1rem;
-    align-self: center;
-}
-.hamburger {
-    display: block;
-    width: 28px;
-    height: 3px;
-    background: #fff;
-    position: relative;
-}
-.hamburger::before,
-.hamburger::after {
-    content: '';
-    display: block;
-    width: 28px;
-    height: 3px;
-    background: #fff;
-    position: absolute;
-    left: 0;
-    transition: 0.3s;
-}
-.hamburger::before { top: -8px; }
-.hamburger::after { top: 8px; }
-.nav-logo {
-    max-width: 150px;
-    height: 100%;
-    display: block;
-    margin: 0.5rem 0 0 0;
-}
-.header-text {
-    font-size: 1.2rem; 
-    color: #ffffff; 
-    max-width: 600px; 
-    margin-bottom: 1.5rem; 
-    line-height: 1.4; 
-}
-.skip-link {
-    position: absolute;
-    left: -999px;
-    top: auto;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    background: #222;
-    color: #fff;
-    padding: 8px 16px;
-    z-index: 1000;
-    text-decoration: underline;
-    border-radius: 4px;
-}
-.skip-link:focus, .skip-link:active {
-    position: static;
-    left: auto;
-    width: auto;
-    height: auto;
-    overflow: visible;
-}
-
-/* --- Media Queries --- */
-.classes-info-box {
-    background: #e0e0e0;
-    padding: 2rem;
-    border-radius: 8px;
-}
-/* --- CSS Reset & Global Styles --- */
-*, *::before, *::after {
-    box-sizing: border-box;
-}
-* {
-    font-family:'Open Sans', sans-serif;
-    margin: 0;
-    padding: 0;
-}
-html, body {
-    height: 100%;
-}
-
-/* --- Base Elements --- */
-h1 {
-    color: #ffffff;
-    font-size: 40px; 
-    margin-bottom: 1rem;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bold;
-}
-h2 {
-    color: #1b447f;
-    font-size: 24px; 
-    margin-bottom: 1rem;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bold;
-}
-h3, h4 {
-    font-size: 17px; 
-    margin-bottom: 1rem;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bold;
-}
-button {
-    background-color: #ecb722;
-    color: #1b447f;
-    border: solid #ffffff 2px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bold;
-}
-a {
-    text-decoration: none;
-}
-img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    object-fit: contain;
-}
-/* .home-item button styles moved to correct block below */
-@media (max-width: 900px) {
-    .home-row {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-        margin-left: auto;
-        margin-right: auto;
-        justify-items: center;
-    }
-}
-/* Remove duplicate img block, keep only one at top */
-.footer-logo, .nav-logo {
-    max-width: 150px;
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: contain;
-}
-@media (max-width: 900px) {
-    /* .footer-links {
-        display: none !important;
-    } */
-}
-/* Hamburger menu styles */
-.nav-toggle {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-    margin-right: 1rem;
-    align-self: center;
-}
-.hamburger {
-    display: block;
-    width: 28px;
-    height: 3px;
-    background: #fff;
-    position: relative;
-}
-.hamburger::before,
-.hamburger::after {
-    content: '';
-    display: block;
-    width: 28px;
-    height: 3px;
-    background: #fff;
-    position: absolute;
-    left: 0;
-    transition: 0.3s;
-}
-.hamburger::before { top: -8px; }
-.hamburger::after { top: 8px; }
-
-@media (max-width: 900px) {
-    nav {
-        flex-direction: row;
-        align-items: center;
-        justify-content: flex-start;
-        position: relative;
-    }
-    .nav-toggle {
-        display: block;
-        margin-right: 1rem;
-    }
-    .nav-logo {
-        margin-bottom: 0;
-        margin-right: 0;
-    }
-    .nav-links-wrapper {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100vw;
-        background: #03a3df;
-        z-index: 100;
-    }
-    .nav-links-wrapper.open {
-        display: block;
-    }
-    .nav-links {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
-        font-size: 1rem;
-        padding-bottom: 0;
-    }
-    .nav-link-item {
-        padding: 0.5rem 0;
-        margin: 0;
-        width: 100%;
-    }
-}
-* {
-    box-sizing: border-box;
-    font-family:'Open Sans', sans-serif;
-    margin: 0;
-    padding: 0;
-}
-*, *::before, *::after {
-    box-sizing: border-box;
-}
-html, body {
-    height:100%;
-}
-header {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: left;
-    min-height: 60vh;
-    padding: 2rem;
-    background-image:  linear-gradient(rgba(27,68,127,0.5), rgba(3,163,223,0.5)), /* semi-transparent black overlay */
-url(https://raw.githubusercontent.com/ruizandre88/archery-website/refs/heads/main/images/hero-image.jpg);
-    background-size: cover;
-    background-position:center;
-    min-height: 400px;
-    margin-bottom:1rem;
-    border-top: solid #ecb722 5px;
-}
-body {
-    display:flex;
-    flex-direction:column;
-    min-height: 100vh;
-}
-nav {
-    display: flex;
-    justify-content: space-between;
-    background-color: #03a3df; 
-    color: #ffffff; 
-    text-align: right; 
-    padding: 1rem 1rem 1rem 2rem;
-    margin-bottom: 0;
-}
-main {
-    flex: 1;
-    margin: 1rem 2rem;
-    padding: 1rem;
-    box-sizing: border-box;
-}
-@media (max-width: 900px) {
-    main {
-        padding-bottom: 140px;
-    }
-    footer {
-        position: relative;
-        z-index: 2;
-    }
-}
-h1 {
-    color: #ffffff;
-    font-size: 40px; 
-    margin-bottom: 1rem;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bold;
-}
-h2 {
-    color: #1b447f;
-    font-size: 24px; 
-    margin-bottom: 1rem;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bold;
-}
-h3 {
-    font-size: 17px; 
-    margin-bottom: 1rem;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bold;
-}
-h4 {
-    font-size: 17px; 
-    margin-bottom: 1rem;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bold;
-}
-button {
-    background-color: #ecb722;
-    color: #1b447f;
-    border: solid #ffffff 2px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bold;
-}
-footer {
-    color: #ffffff;
-    position: relative;
-    background-image: url('https://github.com/ruizandre88/archery-website/blob/main/images/footerImage.jpg?raw=true');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    min-height: 250px;
-    width: 100%;
-    padding: 1rem;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    box-sizing: border-box;
-    z-index: 1;
-}
-
-.home-cards {
-    display: grid;
-    grid-template-rows: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.intro-text {
-    width:70%;
-    font-size: 1.5rem;
-    margin: 1rem auto;
-    text-align: center;
-}
-.nav-logo {
-    max-width: 150px;
-    height: 100%;
-    display: block;
-    margin: 0.5rem 0 0 0;
-    
-}
-.nav-links {
-    color: #ffffff;
-    display: flex; 
-    justify-content: flex-end; 
-    list-style: none; 
-    gap: .1rem; 
-    padding-left: 0; 
-    padding-bottom:15px;
-    font-family: 'Arial', sans-serif;
-    font-size: 14px;
-}
-.nav-link-item {
-    padding:1rem;
-    border-radius: 5px;
-}
-.nav-link-item:hover {
-    text-decoration: underline;
-    border:solid #ecb722 1px;
-    background-color: rgba(27, 68, 127, 0.4);
-}
-.nav-links a { 
-    color: #ffffff; 
-    padding: 1rem; 
-    margin: 0 10px; 
-    text-decoration: none;
-}
-.header-text {
-    font-size: 1.2rem; 
-    color: #ffffff; 
-    max-width: 600px; 
-    margin-bottom: 1.5rem; 
-    line-height: 1.4; 
-}
-.footer-links {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    max-width: 900px;
-    margin: 0 auto 1rem auto;
-    gap: 0.5rem;
-    box-sizing: border-box;
-}
-.footer-links a {
-    color: #ffffff;
-    font-size: small;
-    padding: 10px;
-    margin: 0 8px;
-    text-decoration: none;
-    white-space: nowrap;
-}
-@media (max-width: 900px) {
-    .footer-links {
-        flex-direction: column;
-        align-items: center;
-        gap: 0.5rem;
-        width: 100%;
-        max-width: 100vw;
-        margin: 0 auto 1rem auto;
-    }
-    .footer-links a {
-        margin: 0;
-        width: 100%;
-        text-align: center;
-    }
-    footer {
-        min-height: 120px;
-        padding: 0.5rem;
-        overflow: hidden;
-    }
-}
-.footer-logo {
-    max-width: 150px;
-    height: 100%;
-    display: block;
-    margin: 0.5rem .5rem 0;
-}
-.footer-text {
-    font-size: .75rem;
-    font-family: 'Arial', sans-serif;
-    margin-top: 2rem;
-}
-.skip-link {
-    position: absolute;
-    left: -999px;
-    top: auto;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    background: #222;
-    color: #fff;
-    padding: 8px 16px;
-    z-index: 1000;
-    text-decoration: underline;
-    border-radius: 4px;
-}
-.skip-link:focus, .skip-link:active {
-    position: static;
-    left: auto;
-    width: auto;
-    height: auto;
-    overflow: visible;
+  .tabs { flex-direction: column; }
+  .tabs .tab { width:100%; margin-bottom:0.5rem; }
+  .contact-section { padding:1rem; }
+  .footer-links { flex-direction: column; gap: 0.5rem; width: 100%; max-width: 100vw; }
 }

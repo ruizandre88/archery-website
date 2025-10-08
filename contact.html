@@ -26,34 +26,58 @@
             </div>
         </div>
     </nav>
-    <header>   
+    <header class="header-other">   
         <section class="hero-section">
             <h1>Hit Your First Bullseye</h1>
             <p class="header-text">Aim Higher. Hit Your Mark. Archery for Everyone.</p>
-            <button class="btn" onclick="window.location.href='classes.html'">View Classes</button>
         </section> 
     </header>
     <main id="main-content">
-        <section>
-            <p class="intro-text">At Straight to the Point Archery Academy, we help students build confidence and focus through archery. Our experienced instructors create a safe, welcoming environment for all ages and skill levels.</p>
-        </section>
-        
-        <section class="home-row">
-            <div class="home-item">
-                 <h2>Our Classes</h2>
-                    <img src="images/archery-class.jpg" class="responsive-img" alt="Archery class with instructor helping a student aim at the target">
-                    <button class="btn" onclick="window.location.href='classes.html'">View Classes</button>
-            </div>
-            <div class="home-item">
-                    <h2>Private Lessons</h2>
-                    <img src="images/private-lesson.jpg" class="responsive-img" alt="Archery class with instructor showing how the bow works to a student">
-                    <button class="btn" onclick="window.location.href='private-lessons.html'">Book a Private Lesson</button>
-            </div>
-            <div class="home-item">
-                    <h2>Our Instructors</h2>
-                    <img src="images/instructor-bio-image1.png" class="instructor-img" alt="Archery class instructor posing for a headshot">
-                    <button class="btn" onclick="window.location.href='instructors.html'">Meet Our Instructors</button>
-            </div>
+        <section class="contact-section">
+            <h2>Contact Us</h2>
+            <p class="intro-text">Use the form below to get general information, request private lessons, or register for a class.</p>
+            <form id="contact-form" class="contact-form" action="/api/contact" method="post" novalidate>
+                <p id="form-status" class="visually-hidden" role="status" aria-live="polite"></p>
+
+                <label for="purpose">I am contacting about</label>
+                <select id="purpose" name="purpose" aria-controls="private-fields register-fields" required>
+                    <option value="general">General Information</option>
+                    <option value="private">Private Lessons</option>
+                    <option value="register">Register for a Class</option>
+                </select>
+
+                <label for="name">Full name</label>
+                <input id="name" name="name" type="text" required aria-required="true">
+
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" required aria-required="true">
+
+                <label for="phone">Phone (optional)</label>
+                <input id="phone" name="phone" type="tel">
+
+                <div id="private-fields" class="conditional-fields" style="display:none;" aria-hidden="true">
+                    <label for="instructor">Preferred Instructor (optional)</label>
+                    <input id="instructor" name="instructor" type="text">
+                    <label for="lesson-date">Preferred Date (optional)</label>
+                    <input id="lesson-date" name="lesson-date" type="date">
+                </div>
+
+                <div id="register-fields" class="conditional-fields" style="display:none;" aria-hidden="true">
+                    <label for="class-select">Class</label>
+                    <select id="class-select" name="class-select">
+                        <option value="A101">A101 Basic Archery</option>
+                        <option value="A102">A102 Intermediate</option>
+                        <option value="A103">A103 Advanced</option>
+                    </select>
+                    <label for="participants">Number of Participants</label>
+                    <input id="participants" name="participants" type="number" min="1" value="1">
+                </div>
+
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="5" required aria-required="true"></textarea>
+
+                <button type="submit" class="btn" id="submit-btn">Send Message</button>
+            </form>
         </section>
     </main>
     <footer>
@@ -79,6 +103,75 @@ document.querySelector('.nav-toggle').addEventListener('click', function() {
     this.setAttribute('aria-expanded', !expanded);
     navLinks.classList.toggle('open');
 });
+</script>
+<script>
+// Contact form: dynamic fields, ARIA updates, and server POST
+(function(){
+    var purpose = document.getElementById('purpose');
+    var privateFields = document.getElementById('private-fields');
+    var registerFields = document.getElementById('register-fields');
+    var form = document.getElementById('contact-form');
+    var status = document.getElementById('form-status');
+    var submitBtn = document.getElementById('submit-btn');
+
+    function updateFields(){
+        var v = purpose.value;
+        var showPrivate = (v === 'private');
+        var showRegister = (v === 'register');
+        privateFields.style.display = showPrivate ? 'block' : 'none';
+        privateFields.setAttribute('aria-hidden', !showPrivate);
+        registerFields.style.display = showRegister ? 'block' : 'none';
+        registerFields.setAttribute('aria-hidden', !showRegister);
+    }
+    purpose.addEventListener('change', updateFields);
+    updateFields();
+
+    function setStatus(message, isError){
+        status.textContent = message;
+        status.className = isError ? 'status-error' : 'status-success';
+        status.classList.remove('visually-hidden');
+        if (!isError) {
+            // move focus to the status message for screen readers
+            status.focus();
+        }
+    }
+
+    form.addEventListener('submit', function(e){
+        e.preventDefault();
+        submitBtn.disabled = true;
+        setStatus('Sending message…', false);
+
+        var formData = new FormData(form);
+        var payload = {};
+        formData.forEach(function(value, key){ payload[key] = value; });
+
+        fetch(form.action, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        }).then(function(resp){
+            if (!resp.ok) throw new Error('Network response was not ok');
+            return resp.json();
+        }).then(function(data){
+            if (data && data.success) {
+                setStatus('Thanks! Your message was sent.', false);
+                form.reset();
+                updateFields();
+            } else {
+                throw new Error((data && data.error) || 'Server error');
+            }
+        }).catch(function(err){
+            // If there's no server (testing locally), simulate success so QA can test the UI.
+            console.warn('Submission failed, entering test-mode simulation:', err);
+            console.log('Simulated payload:', payload);
+            setStatus('Test mode: message simulated (no server). Check console for payload.', false);
+            form.reset();
+            updateFields();
+        }).finally(function(){
+            submitBtn.disabled = false;
+        });
+    });
+})();
 </script>
 </body>
 </html>

@@ -5,7 +5,7 @@
     <link rel="stylesheet" type="text/css" href="css/styles.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" rel="stylesheet">
-    <title>Archery Academy</title>
+    <title>Private Lessons</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -26,34 +26,45 @@
             </div>
         </div>
     </nav>
-    <header>   
+    <header class="header-other">   
         <section class="hero-section">
-            <h1>Hit Your First Bullseye</h1>
+            <h1>Private Lessons</h1>
             <p class="header-text">Aim Higher. Hit Your Mark. Archery for Everyone.</p>
-            <button class="btn" onclick="window.location.href='classes.html'">View Classes</button>
+            <button class="btn" onclick="window.location.href='contact.html'">Book Now</button>
         </section> 
     </header>
     <main id="main-content">
-        <section>
-            <p class="intro-text">At Straight to the Point Archery Academy, we help students build confidence and focus through archery. Our experienced instructors create a safe, welcoming environment for all ages and skill levels.</p>
+        <section class="classes-content">
+                <div class="tabs">
+                    <button class="tab active" data-tab="pl-beginner">Single Lesson</button>
+                    <button class="tab" data-tab="pl-intermediate">3 Lesson Package</button>
+                    <button class="tab" data-tab="pl-advanced">10 Lesson Package</button>
+                </div>
+                <div class="tab-content" id="pl-beginner" style="display: block;">
+                    <h2>Single Lesson</h2>
+                    <p>1 hour of expert guidance by a USA Archery-certified coach.</p>
+                    <ul>
+                        <li>Price: $50</li>
+                    </ul>
+                </div>
+                <div class="tab-content" id="pl-intermediate" style="display: none;">
+                    <h2>3 Lesson Package</h2>
+                    <p>3 lessons, 1 hour each, with expert guidance by a USA Archery-certified coach.</p>
+                    <ul>
+                        <li>Price: $140</li>
+                    </ul>
+                </div>
+                <div class="tab-content" id="pl-advanced" style="display: none;">
+                    <h2>10 Lesson Package</h2>
+                    <p>10 lessons, 1 hour each, with expert guidance by a USA Archery-certified coach.</p>
+                    <ul>
+                        <li>Price: $900</li>
+                    </ul>
+                </div>
         </section>
-        
-        <section class="home-row">
-            <div class="home-item">
-                 <h2>Our Classes</h2>
-                    <img src="images/archery-class.jpg" class="responsive-img" alt="Archery class with instructor helping a student aim at the target">
-                    <button class="btn" onclick="window.location.href='classes.html'">View Classes</button>
-            </div>
-            <div class="home-item">
-                    <h2>Private Lessons</h2>
-                    <img src="images/private-lesson.jpg" class="responsive-img" alt="Archery class with instructor showing how the bow works to a student">
-                    <button class="btn" onclick="window.location.href='private-lessons.html'">Book a Private Lesson</button>
-            </div>
-            <div class="home-item">
-                    <h2>Our Instructors</h2>
-                    <img src="images/instructor-bio-image1.png" class="instructor-img" alt="Archery class instructor posing for a headshot">
-                    <button class="btn" onclick="window.location.href='instructors.html'">Meet Our Instructors</button>
-            </div>
+        <section class="non-discriminatory-policy">
+            <h3>Non-Discriminatory Policy</h3>
+            <p>Straight to the Point Archery admits students of any race, gender presentation, sexuality, religion, national origin, or ethnic origin to all rights, privileges, programs, and activities available to students at the school. We do not discriminate in administering our educational policies, admission policies, and other school-administered programs. All students are welcome and valuable members of our community.</p>
         </section>
     </main>
     <footer>
@@ -78,6 +89,45 @@ document.querySelector('.nav-toggle').addEventListener('click', function() {
     var expanded = this.getAttribute('aria-expanded') === 'true';
     this.setAttribute('aria-expanded', !expanded);
     navLinks.classList.toggle('open');
+});
+</script>
+<script>
+// Tabs behavior (switch content)
+document.querySelectorAll('.tab').forEach(function(tab) {
+    tab.addEventListener('click', function() {
+        document.querySelectorAll('.tab').forEach(function(t) {
+            t.classList.remove('active');
+        });
+        tab.classList.add('active');
+        document.querySelectorAll('.tab-content').forEach(function(content) {
+            content.style.display = 'none';
+        });
+        var target = document.getElementById(tab.getAttribute('data-tab'));
+        if (target) target.style.display = 'block';
+    });
+});
+
+// Mobile expand/collapse behavior for tabs
+document.querySelectorAll('.tabs .tab').forEach(function(tab) {
+    tab.addEventListener('click', function(e) {
+        var tabs = tab.closest('.tabs');
+        if (window.innerWidth <= 600) {
+            if (!tabs.classList.contains('expanded')) {
+                tabs.classList.add('expanded');
+                e.stopPropagation();
+            } else {
+                tabs.classList.remove('expanded');
+            }
+        }
+    });
+});
+// Collapse when clicking outside
+document.addEventListener('click', function(e) {
+    document.querySelectorAll('.tabs.expanded').forEach(function(tabs) {
+        if (!tabs.contains(e.target)) {
+            tabs.classList.remove('expanded');
+        }
+    });
 });
 </script>
 </body>
